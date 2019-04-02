@@ -1,0 +1,2 @@
+{villanName:"Luthor",hints:["hates superman","his IQ is more than 17", "his body guard is an android woman"]},
+{villanName:"Joker",hints:["creepy face and smile","batman best enemy","dresses in purple"]},

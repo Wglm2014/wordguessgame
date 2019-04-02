@@ -1,0 +1,3 @@
+{heroName:"batman", hints:["he is the dark night","secretly all man want to be like him"]},
+{heroName:"super man", hints:["real name Kahl El","the yellow sun gives him powers","he is a reporter"]},
+{heroName:"Thor",hints:["from scandinabian mithology","he is the god of thunder", "carrier a hammer"]}
