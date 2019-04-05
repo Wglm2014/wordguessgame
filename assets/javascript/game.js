@@ -29,7 +29,12 @@ function play() {
     var wordArray = word.split("");
     console.log(wordArray.length);
     wordArray.forEach(element => {
-        guessedWord.textContent += "-";
+        console.log(guessedWord);
+        var span = document.createElement("span");
+        span.setAttribute("id", element + "Span");
+        span.setAttribute("class", "border");
+        span.textContent = "__";
+        guessedWord.appendChild(span);
     });
 
     hint.textContent = hints[Math.floor(Math.random() * hints.length)];
@@ -40,7 +45,11 @@ function play() {
 //opens the file with the words and hints
 function categorySelected(selection) {
     words = categories[selection];
-    console.log(words)
+    word = '';
+    hints = [];
+    hint.textContent = "";
+    guessedWord.textContent += "";
+
 }
 
 

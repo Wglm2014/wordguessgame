@@ -1,84 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Word Game</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Word Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    </head>
+</head>
 
-    <body>
-        <div class="container">
-            <div class="jumbotron">
-                <header>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h1>The Hanging Men Game</h1>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <header>
+                <div class="row ">
+                    <div class="col-md-4 text-center">
+                        <h3>THE HANGIN</h3>
+                        <h3> MEN GAME</h3>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <label for="Categories">
+                            <H3>CHOOSE A CATEGORY</H3>
+                        </label>
+                        <select name="categories" id="categories" class="form-control"
+                            onchange="categorySelected(this.value)">
+                            <option value=-1>Select a category</option>
+                            <option value=0>Super Heroes</option>
+                            <option value=1>Super Villans</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4"><button class="btn btn-lg btn-success"
+                                    onclick="play()">Play&nbsp;</button>
+                            </div>
+                            <div class="col-md-4"><button class="btn btn-lg btn-danger">Reset</button></div>
                         </div>
-                        <div class="col-md-4">
-                            <h3>Scrore:</h3><button>&lt;-Back</button>
+                        <div class="row border">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-3">
+                                <h3 class="score">Score:&nbsp;</h3>
+                                <h3 id="score"></h3>
+                            </div>
                         </div>
                     </div>
-                </header>
-            </div>
+                </div>
+            </header>
         </div>
+        <div class="row">
+            <!--dynamic image according to the user answer-->
+            <div class="col-lg-4"><img width="300" class="img-fluid img-thumbnail" src="./assets/images/hangman1.jpg"
+                    alt="the hanging man"></div>
 
-        <div class="container">
-            <div class="row">
-                <!--dynamic image according to the user answer-->
-                <div class="col-lg-5"><img class="img-fluid img-thumbnail" src="./assets/images/hangman1.jpg" alt="the hanging man"></div>
-
-                <div class="col-lg-5 float-rigt">
-                    <div class="row">
-                        <p><span>
-                                <h6>Guess:</h6>
-                            </span><span id="guessedWord"></span></p>
-                    </div>
-                    <div class="row">
-                        <h6>Pressed Letters:&nbsp;</h2>
-                            <p id="lettersPress"></p>
-                    </div>
-                    <div class="row">
-                        <h1>HINT:&nbsp;<span id="hint" class="text-alert"></span></h1>
+            <div class="col-lg-6 float-rigt">
+                <div class="row">
+                    <div class="col-sm-12 text-success">
+                        <h3>Guessed:&nbsp;<span id="guessedWord"></span></h3>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <h2></h2>
-            </div>
-            <div class="row">
-            </div>
-            <div class="row">
-                <h2></h2>
-            </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="Categories">
-                        <H3>CHOOSE A CATEGORY</H3>
-                    </label>
-                    <select name="categories" id="categories" class="form-control" onchange="categorySelected(this.value)">
-                        <option value=-1>select one</option>
-                        <option value=0>Super Heroes</option>
-                        <option value=1>Super Villans</option>
-                    </select>
+                <div class="row">
+                    <div class="col-sm-12 text-danger">
+                        <h3>Pressed Letters:&nbsp;</h3>
+                        <h3 id="lettersPress"></h3>
+                    </div>
                 </div>
-                <div class="col-md-3"></div>
-                <div class="col-md-3 float-right">
-                    <button class="btn btn-success" onclick="play()">Play</button>
-                    <button class="btn btn-danger">Reset</button>
+                <div class="row">
+                    <hr>
+                </div>
+                <div class="row text-info">
+                    <div class="col-sm-10">
+                        <h3>hint:&nbsp;<span id="hint" class="text-alert border"></span></h3>
+                    </div>
                 </div>
 
             </div>
-        </div>
-        </div>
 
-        <!--scripts -->
-        <script src="assets/javascript/game.js"></script>
-    </body>
+        </div>
+    </div>
+    <!--scripts -->
+    <script src="assets/javascript/game.js"></script>
+</body>
 
 </html>
