@@ -11,16 +11,17 @@ var image = document.getElementById("image");
 var words = [];
 var word = '';
 var hints = [];
-var selectedValue = parseInt(categoriesList.value);
+var selectedValue = -1;
 var totalWordLetters = 0;
 var letterFound = "";
 var score = 0;
 var chances = 11;
 var hangin = 0;
 var wordArray = [];
+
 function onSelection() {
     selectedValue = parseInt(categoriesList.value);
-    console.log(selectedValue);
+    resetVars(true);
 }
 
 function play() {
@@ -31,6 +32,8 @@ function play() {
     word = words[number][0];
     hints = words[number][1];
     wordArray = word.split("");
+
+    //creates the boxes to be replace with the letters of the word to be guessed
     for (var i = 0; i < wordArray.length; i++) {
         var span = document.createElement("span");
         span.setAttribute("id", "Span" + i);
@@ -41,86 +44,90 @@ function play() {
     hint.textContent = hints[Math.floor(Math.random() * hints.length)];
 }
 
-//reset all the game
-
-function reset() {
-    resetVars(false);
-}
 
 //user gussing the words
 document.onkeyup = function (event) {
     if (totalWordLetters === word.length) {
         keepPlaying();
     };
+
+
     var userKey = event.key;
     //only is the user press and alphabet letter
     if (alphabet.includes(userKey)) {
 
         lettersPress.textContent += userKey;
+
+        //find if the pressed key  exists in the random word
         if (word.includes(userKey)) {
-            totalWordLetters++;
+            console.log(score);
+
+            //searches all the events where the letter exists inside of the array
             for (var i = 0; i < wordArray.length; +i++) {
                 if (wordArray[i] === userKey) {
+                    totalWordLetters++;
+
                     letterFound = document.getElementById("Span" + i);
                     letterFound.textContent = userKey;
                 }
-            };
+            }
+            console.log(totalWordLetters);
+            // if the total words letters equals the lenght scores
+            if (totalWordLetters === word.length) {
+                score++;
+                gameScore.textContent = score;
+                // if score is 10 he won the whole match
+                if (score === 3) {
+                    song.currentTime = 0;
+                    setTimeout(function () { song.play() }, 3000);
+                    song.pause();
+                    reset(true);
+                }
+            }
 
         } else {
-            hangin++;
-            image.setAttribute("source", "../images/hangman" + hangin + ".jpg");
-        }
-        if (totalWordLetters === word.length) {
-            score++;
-            gameScore.textContent = score;
-            // keep playing
-        }
-        if (score = 10) {
-            for (var i = 0; i < 100; i++) {
-                song.play();
+            if (chances === hangin) {
+                alert("Lost this one!!!");
+                setTimeout(function () { resetVars(true) }, 3000);
+            } else {
+                hangin++;
+                var source = "./assets/images/hangman" + hangin + ".jpg";
+                image.src = source;
             }
-            song.pause();
+
         }
+
     }
 }
 
 function keepPlaying() {
     var again = confirm("Keep playing?");
     if (again === 1) {
+        resetVars(true);
         play();
 
     } else {
-        reset();
+        resetVars(true);
     }
 }
 
-function removeSpans() {
-
-    guessedWord.textContent = "";
-
-}
 
 //reset all variables
 function resetVars(partial) {
-    if (partial) {
-        selectedValue = categoriesList.value;
-        totalWordLetters = 0;
-        words = [];
-        hints = [];
-        word = "";
-        letterFound = "";
-        hangin = 0;
-        removeSpans();
-    } else {
+    hint.textContent = "";
+    selectedValue = categoriesList.value;
+    totalWordLetters = 0;
+    words = [];
+    hints = [];
+    word = "";
+    letterFound = "";
+    hangin = 0;
+    guessedWord.textContent = "";
+    lettersPress.textContent = "";
+    image.src = "./assets/images/hangman0.jpg";
+    if (!partial) {
         categoriesList.value = "-1";
         selectedValue = -1;
-        totalWordLetters = 0;
-        words = [];
-        hints = [];
-        word = "";
-        score = 0;
-        hangin = 0;
-        removeSpans();
     }
 
 }
